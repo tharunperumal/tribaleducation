@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>TRIBAL EDUCATION</title>
+
+   <!-- swiper css link  -->
+   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" type="text/css"  href="style.css">
+   <link rel="stylesheet" type="text/css" href="key.css">
+   <link rel="stylesheet" type="text/css" href="logreg.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+  <link rel="python.py" href="C:\Users\KPRCAS\Documents\tp">
+</head>
+<body>
+ 
+   
+<!-- header section starts  -->
+
+<header class="header">
+
+   <section class="flex">
+    
+<input type="search" value="" id="search" onchange="openPage()" class="use-keyboard-input" style="position: absolute; top: 20px; right: 80px;border: 3px solid #32e17c;height: 40px; border-radius: 50px;width: 300px;padding: 0px 10px;"></input>
+    <script>
+        function openPage() {
+            var x = document.getElementById("search").value;
+
+            if (x === "ಘఅಇ") {
+                window.open("course.html");
+            }
+
+            if (x === "ಆರ್ಟಿವೈ") {
+                window.open("contact.html");
+            }
+
+        }
+    </script>
+
+     <script> const Keyboard = {
+    elements: {
+        main: null,
+        keysContainer: null,
+        keys: []
+    },
+
+    eventHandlers: {
+        oninput: null,
+        onclose: null
+    },
+
+    properties: {
+        value: "",
+        capsLock: false
+    },
+
+    init() {
+        // Create main elements
+        this.elements.main = document.createElement("div");
+        this.elements.keysContainer = document.createElement("div");
+
+        // Setup main elements
+        this.elements.main.classList.add("keyboard", "keyboard--hidden");
+        this.elements.keysContainer.classList.add("keyboard__keys");
+        this.elements.keysContainer.appendChild(this._createKeys());
+
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
+        // Add to DOM
+        this.elements.main.appendChild(this.elements.keysContainer);
+        document.body.appendChild(this.elements.main);
+
+        // Automatically use keyboard for elements with .use-keyboard-input
+        document.querySelectorAll(".use-keyboard-input").forEach(element => {
+            element.addEventListener("focus", () => {
+                this.open(element.value, currentValue => {
+                    element.value = currentValue;
+                });
+            });
+        });
+    },
+
+    _createKeys() {
+        const fragment = document.createDocumentFragment();
+        const keyLayout = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
+            "ಘ", "అ", "ಇ", "ಆರ್", "ಟಿ", "ವೈ", "ಯು", "ಠ", "ಓಹ್", "ಪ",
+            "caps",         "ಎ", "ರು", "ಡಿ", "চ", "ಜಿ", "ಗಂ", "ಜ", "ಕೆ", "ಎಲ್", "enter",
+            "done", "ზ", "ಷ", "ಸಿ", "ಥ", "ಬಿ", "ಎನ್", "ಮೀ", ",", ".", "?",
+            "space"
+        ];
+
+        // Creates HTML for an icon
+        const createIconHTML = (icon_name) => {
+            return `<i class="material-icons">${icon_name}</i>`;
+        };
+
+        keyLayout.forEach(key => {
+            const keyElement = document.createElement("button");
+            const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
+
+            // Add attributes/classes
+            keyElement.setAttribute("type", "button");
+            keyElement.classList.add("keyboard__key");
+
+            switch (key) {
+                case "backspace":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("backspace");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "caps":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+                    keyElement.innerHTML = createIconHTML("keyboard_capslock");
+
+                    keyElement.addEventListener("click", () => {
+                        this._toggleCapsLock();
+                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                    });
+
+                    break;
+
+                case "enter":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("keyboard_return");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "space":
+                    keyElement.classList.add("keyboard__key--extra-wide");
+                    keyElement.innerHTML = createIconHTML("space_bar");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += " ";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "done":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
+                    keyElement.innerHTML = createIconHTML("check_circle");
+
+                    keyElement.addEventListener("click", () => {
+                        this.close();
+                        this._triggerEvent("onclose");
+                    });
+
+                    break;
+
+                default:
+                    keyElement.textContent = key.toLowerCase();
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+            }
+
+            fragment.appendChild(keyElement);
+
+            if (insertLineBreak) {
+                fragment.appendChild(document.createElement("br"));
+            }
+        });
+
+        return fragment;
+    },
+
+    _triggerEvent(handlerName) {
+        if (typeof this.eventHandlers[handlerName] == "function") {
+            this.eventHandlers[handlerName](this.properties.value);
+        }
+    },
+
+    _toggleCapsLock() {
+        this.properties.capsLock = !this.properties.capsLock;
+
+        for (const key of this.elements.keys) {
+            if (key.childElementCount === 0) {
+                key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+            }
+        }
+    },
+
+    open(initialValue, oninput, onclose) {
+        this.properties.value = initialValue || "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.remove("keyboard--hidden");
+    },
+
+    close() {
+        this.properties.value = "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.add("keyboard--hidden");
+    }
+};
+
+window.addEventListener("DOMContentLoaded", function () {
+    Keyboard.init();
+});
+</script>
+
+      <a href="#home" class="logo">Learn Tribal</a>
+
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+      <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="course.html">Courses</a>
+  <a href="Teacher.html">Teachers</a>
+  <a href="Reviews.html">Reviews</a>
+  <a href="contact.html">Contact</a>
+</div>
+        
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+   
+    
+
+
+      <div id="menu-btn" class="fas fa-bars"></div>
+
+   </section>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+   <div class="row">
+
+      <div class="content">
+         <h3>TRIBAL <span>TUTELAGE</span></h3>
+         <a href="#contact" class="btn">sign-in/sign-out</a>
+      </div>
+
+      <div class="image">
+         <img src="images/1.jpg" alt="">
+       
+      </div>
+
+   </div>
+   <br> 
+   <div id="labnol" method="get" action="http://www.labnol.org">
+      
+  <div class="speech">
+    <input type="text" name="s" id="transcript" placeholder=" Say Something" />
+    <img onclick="startDictation()" src="https://i.imgur.com/cHidSVu.gif" />
+  </div>
+</div>
+<script>
+  function startDictation() {
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      recognition.start();
+
+      recognition.onresult = function (e) {
+        document.getElementById('transcript').value = e.results[0][0].transcript;
+        recognition.stop();
+        document.getElementById('labnol').submit();
+      };
+      recognition.onerror = function (e) {
+        recognition.stop();
+      };
+    }
+  }
+</script>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- couter section stars  -->
+
+<section class="count">
+
+   <div class="box-container">
+
+      <div class="box">
+         <i class="fas fa-graduation-cap"></i>
+         <div class="content">
+            <h3>7+</h3>
+            <p>courses</p>
+         </div>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-user-graduate"></i>
+         <div class="content">
+            <h3>2+</h3>
+            <p>students</p>
+         </div>
+      </div>
+
+
+
+      <div class="box">
+         <i class="fas fa-chalkboard-user"></i>
+         <div class="content">
+            <h3>4+</h3>
+            <p>teachers</p>
+         </div>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-face-smile"></i>
+         <div class="content">
+            <h3>100%</h3>
+            <p>satisfaction</p>
+         </div>
+      </div>
+
+   </div>
+
+</section>
+
+<!-- couter section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="images/about-img.svg" alt="">
+      </div>
+
+      
+
+   </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- courses section starts  -->
+
+
+
+
+x
+
+
+
+<!-- courses section ends -->
+
+<!-- teachers section starts  -->
+
+<section class="teachers" id="teachers">
+ 
+<!-- teachers section ends -->
+
+<!-- reviews section starts  -->
+
+<!-- reviews section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+   <h1 class="heading"><span>Login</span></h1>
+
+   <div class="row">
+
+      <div class="image">
+         <img src="images/contact-img.svg" alt="">
+      </div>
+
+       <form name="myform"  action="login.php" method="POST" >
+
+            <p><h2 style="
+                   color: #00e77f;
+               ">Username</h2></p>
+           <h1> <input type="text" name="uname" placeholder="Enter Username " required=""></h1>
+
+            <p><h2 style="
+                   color: #00e77f;
+               ">Password</h2></p>
+            <input type="password" name="upswd" placeholder="Enter Password" required="">
+
+
+            <input type="submit" name="" value="Login">
+
+            <br><br>
+            <a href="register.html">Register for new account ?</a>
+
+        </form>
+   </div>
+
+</section>
+
+<!-- contact section ends -->
+
+<!-- footer section starts  -->
+
+<footer class="footer">
+
+   <section>
+
+      <div class="share">
+         <a href="#" class="fab fa-facebook-f"></a>
+         <a href="#" class="fab fa-twitter"></a>
+         <a href="#" class="fab fa-linkedin"></a>
+         <a href="#" class="fab fa-instagram"></a>
+         <a href="#" class="fab fa-youtube"></a>
+      </div>
+
+      <div class="credit">&copy; copyright @ 2022 by <span>mr.Tharun p</span> | all rights reserved!</div>
+
+   </section>
+
+</footer>
+
+<!-- footer section ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- swiper js link  -->
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

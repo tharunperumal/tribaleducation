@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+     <link rel="stylesheet" type="text/css" href="style.css">
+          <link rel="stylesheet" type="text/css" href="logreg.css">
+    <script type="text/javascript" src="script.js"></script>
+<style >
+    .contact .row{
+       display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-direction: row-reverse;
+}
+
+</style>
+ </head>
+ <body>
+         <section class="contact" id="contact">
+
+   <h1 class="heading"><span>Register</span></h1>
+
+   <div class="row">
+
+      <div class="image">
+         <img src="images/contact-img.svg" alt="">
+      </div>
+
+        <form name="myform2" action="register.php" method="POST">
+
+            <p></p><h2 style="
+                   color: #00e77f;
+               ">Username</h2><p></p>
+            <input type="text" name="uname1" placeholder="Enter Username" required="">
+
+            <p><h1 style="
+    color: #00e77f;
+">Email </p>
+            <input type="Email" name="email" placeholder="Enter email id" required="">
+
+            <p>Password</p>
+            <input type="password" name="upswd1" placeholder="Enter Password" required="">
+
+            <p>Retype Password</p>
+            <input type="password" name="upswd2" placeholder="Re-Enter Password" required="">
+
+            <input type="submit" name="" value="Register">
+
+            <br><br>
+            <a href="index.html">existing user, login !?</a>
+        </form>
+   </div>
+
+</section>
+
+ </body>
+ </html>
+
+
+ 
